@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frist_mobile_app/dto/auth_result.dart';
 import 'package:frist_mobile_app/features/auth/Presentation/login_screen.dart';
+import 'package:frist_mobile_app/services/auth_service.dart';
 import 'package:frist_mobile_app/utils/Validations.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -153,7 +155,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       String name = userNameController.text;
                       String email = userEmailController.text;
                       String cpassword = cPasswordController.text;
@@ -183,8 +185,14 @@ class _SigninScreenState extends State<SigninScreen> {
                         return;
                       }
 
-                      // If all checks pass
-                      _showAlert(context, "Success", "Registration successful!");
+                      //User Register Here 
+                      AuthResult result = await AuthService.userRegister(name, email, password);
+                      if(result.success){
+                        // If all checks pass
+                        _showAlert(context, "Success", result.message);  
+                      }else{
+                        _showAlert(context, "Error", result.message);
+                      }                    
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF2167E3),
