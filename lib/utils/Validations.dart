@@ -7,9 +7,10 @@ class Validators {
 
   // Password validation (min 8 chars, at least 1 letter & 1 number)
   static bool isValidPassword(String password) {
-    final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
+    final regex = RegExp(r'^.{6,}$'); // any 6 or more characters
     return regex.hasMatch(password);
   }
+
 
   // Mobile number validation (10 digits, adjust for your country)
   static bool isValidMobile(String mobile) {

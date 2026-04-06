@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:frist_mobile_app/features/auth/Presentation/login_screen.dart';
+import 'package:frist_mobile_app/utils/Validations.dart';
 
-class SigninScreen extends StatelessWidget {
+class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
+
+  @override
+  State<SigninScreen> createState() => _SigninScreenState();
+}
+
+class _SigninScreenState extends State<SigninScreen> {
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController userEmailController = TextEditingController();
+  final TextEditingController cPasswordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool _isPassword = true;
+  bool _isCPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -18,109 +32,109 @@ class SigninScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
-                
-                // 1. Logo
+
+                // Logo
                 Image.network(
                   'https://res.cloudinary.com/dgokbm0dx/image/upload/v1775473752/vertex_miad2b.jpg',
                   height: 100,
                   width: 100,
                   fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) => 
+                  errorBuilder: (context, error, stackTrace) =>
                       const Icon(Icons.broken_image, size: 80, color: Colors.grey),
                 ),
 
                 const SizedBox(height: 20),
-                
-                // 2. Titles
+
                 const Text(
                   "Register Here",
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF2D3142)),
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  "Create an account, Its Free",
+                  "Create an account, It's Free",
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
 
                 const SizedBox(height: 40),
 
-                // 3. Email Field
+                // User Name
                 TextField(
+                  controller: userNameController,
                   decoration: InputDecoration(
                     hintText: "User Name",
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
                     ),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                // 3. Email Field
+                // Email
                 TextField(
+                  controller: userEmailController,
                   decoration: InputDecoration(
                     hintText: "Email",
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
                     ),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                // 4. Password Field with Icons
+                // Confirm Password
                 TextField(
-                  obscureText: true,
+                  controller: cPasswordController,
+                  obscureText: _isCPassword,
                   decoration: InputDecoration(
-                    hintText: "Conform Password",
+                    hintText: "Confirm Password",
                     prefixIcon: const Icon(Icons.lock_outline_rounded, color: Color(0xFF2D3142)),
-                    suffixIcon: const Icon(Icons.visibility_outlined, color: Colors.grey),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isCPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isCPassword = !_isCPassword;
+                        });
+                      },
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
                     ),
                   ),
                 ),
 
                 const SizedBox(height: 20),
 
-                // 4. Password Field with Icons
+                // Password
                 TextField(
-                  obscureText: true,
+                  controller: passwordController,
+                  obscureText: _isPassword,
                   decoration: InputDecoration(
                     hintText: "Password",
                     prefixIcon: const Icon(Icons.lock_outline_rounded, color: Color(0xFF2D3142)),
-                    suffixIcon: const Icon(Icons.visibility_outlined, color: Colors.grey),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPassword = !_isPassword;
+                        });
+                      },
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
                     ),
                   ),
                 ),
 
-                // 5. Forgot Password
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -134,16 +148,46 @@ class SigninScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // 6. Login Button
+                // Register Button
                 SizedBox(
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () {
-                      
+                      String name = userNameController.text;
+                      String email = userEmailController.text;
+                      String cpassword = cPasswordController.text;
+                      String password = passwordController.text;
+
+                      // Empty fields
+                      if (name.isEmpty || email.isEmpty || cpassword.isEmpty || password.isEmpty) {
+                        _showAlert(context, "Error", "All fields are required..!");
+                        return;
+                      }
+
+                      // Email validation
+                      if (!Validators.isValidEmail(email)) {
+                        _showAlert(context, "Warning", "Enter a valid Email...");
+                        return;
+                      }
+
+                      // Password length
+                      if (!Validators.isValidPassword(password)) {
+                        _showAlert(context, "Error", "Password must be at least 6 characters long..!");
+                        return;
+                      }
+
+                      // Password match
+                      if (cpassword != password) {
+                        _showAlert(context, "Error", "Passwords do not match...");
+                        return;
+                      }
+
+                      // If all checks pass
+                      _showAlert(context, "Success", "Registration successful!");
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2167E3), // Match the blue in image
+                      backgroundColor: const Color(0xFF2167E3),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                       elevation: 0,
                     ),
@@ -154,18 +198,17 @@ class SigninScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 20), // Spacer for bottom text
+                const SizedBox(height: 20),
 
-                // 7. Footer text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Allready have an account? ", style: TextStyle(color: Colors.grey)),
+                    const Text("Already have an account? ", style: TextStyle(color: Colors.grey)),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context)=> LoginScreen()),
+                          MaterialPageRoute(builder: (context) => const LoginScreen()),
                         );
                       },
                       child: const Text(
@@ -181,6 +224,26 @@ class SigninScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showAlert(BuildContext context, String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
