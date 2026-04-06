@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "621851175504",
+    "project_id": "flutter-mobil-application",
+    "storage_bucket": "flutter-mobil-application.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621851175504:android:6895392a2f0c81aa233f55",
+        "android_client_info": {
+          "package_name": "com.example.frist_mobile_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2dPLN2vD5dJhtc_OasXJcMPgfpXi_P4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
