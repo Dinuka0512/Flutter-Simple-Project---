@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frist_mobile_app/features/auth/Presentation/signin_screen.dart';
+import 'package:frist_mobile_app/features/auth/Presentation/login_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SigninScreen extends StatelessWidget {
+  const SigninScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 40),
+                const SizedBox(height: 10),
                 
                 // 1. Logo
                 Image.network(
@@ -33,12 +33,12 @@ class LoginScreen extends StatelessWidget {
                 
                 // 2. Titles
                 const Text(
-                  "Welcome Back",
+                  "Register Here",
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF2D3142)),
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  "Login to continue",
+                  "Create an account, Its Free",
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
 
@@ -47,7 +47,46 @@ class LoginScreen extends StatelessWidget {
                 // 3. Email Field
                 TextField(
                   decoration: InputDecoration(
-                    hintText: "Email or Username",
+                    hintText: "User Name",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // 3. Email Field
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // 4. Password Field with Icons
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Conform Password",
+                    prefixIcon: const Icon(Icons.lock_outline_rounded, color: Color(0xFF2D3142)),
+                    suffixIcon: const Icon(Icons.visibility_outlined, color: Colors.grey),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -109,29 +148,28 @@ class LoginScreen extends StatelessWidget {
                       elevation: 0,
                     ),
                     child: const Text(
-                      "Login",
+                      "Register",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 120), // Spacer for bottom text
+                const SizedBox(height: 20), // Spacer for bottom text
 
                 // 7. Footer text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account? ", style: TextStyle(color: Colors.grey)),
+                    const Text("Allready have an account? ", style: TextStyle(color: Colors.grey)),
                     GestureDetector(
                       onTap: () {
-                        // Navigate to SignUp
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context)=> SigninScreen()),
+                          MaterialPageRoute(builder: (context)=> LoginScreen()),
                         );
                       },
                       child: const Text(
-                        "Sign Up",
+                        "Log In",
                         style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
                     ),
