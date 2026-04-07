@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frist_mobile_app/features/auth/signin_screen.dart';
 import 'package:frist_mobile_app/features/dashboard/dashboard.dart';
+import 'package:frist_mobile_app/features/ui/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,7 +9,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -27,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                   width: 100,
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) => 
-                      const Icon(Icons.broken_image, size: 80, color: Colors.grey),
+                      const Icon(Icons.broken_image, size: 80, color: AppColors.textLight),
                 ),
 
                 const SizedBox(height: 20),
@@ -35,12 +36,12 @@ class LoginScreen extends StatelessWidget {
                 // 2. Titles
                 const Text(
                   "Welcome Back",
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF2D3142)),
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.textDark),
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   "Login to continue",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: TextStyle(fontSize: 16, color: AppColors.textLight),
                 ),
 
                 const SizedBox(height: 40),
@@ -52,11 +53,11 @@ class LoginScreen extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
+                      borderSide: const BorderSide(color: AppColors.border),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
+                      borderSide: const BorderSide(color: AppColors.border),
                     ),
                   ),
                 ),
@@ -68,16 +69,16 @@ class LoginScreen extends StatelessWidget {
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
-                    prefixIcon: const Icon(Icons.lock_outline_rounded, color: Color(0xFF2D3142)),
-                    suffixIcon: const Icon(Icons.visibility_outlined, color: Colors.grey),
+                    prefixIcon: const Icon(Icons.lock_outline_rounded, color: AppColors.textDark),
+                    suffixIcon: const Icon(Icons.visibility_outlined, color: AppColors.textLight),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
+                      borderSide: const BorderSide(color: AppColors.border),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.black12),
+                      borderSide: const BorderSide(color: AppColors.border),
                     ),
                   ),
                 ),
@@ -89,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       "Forgot Password?",
-                      style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
+                      style: TextStyle(color: AppColors.red, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -108,13 +109,13 @@ class LoginScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2167E3), // Match the blue in image
+                      backgroundColor: AppColors.red, // Match the blue in image
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                       elevation: 0,
                     ),
                     child: const Text(
                       "Login",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.background),
                     ),
                   ),
                 ),
@@ -125,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account? ", style: TextStyle(color: Colors.grey)),
+                    const Text("Don't have an account? ", style: TextStyle(color: AppColors.textLight)),
                     GestureDetector(
                       onTap: () {
                         // Navigate to SignUp
@@ -136,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: const Text(
                         "Sign Up",
-                        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                        style: TextStyle(color: AppColors.red, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
