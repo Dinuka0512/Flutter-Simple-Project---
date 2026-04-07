@@ -188,8 +188,9 @@ class _SigninScreenState extends State<SigninScreen> {
                       //User Register Here 
                       AuthResult result = await AuthService.userRegister(name, email, password);
                       if(result.success){
-                        // If all checks pass
-                        _showAlert(context, "Success", result.message);  
+                        // Show success alert and navigate only after OK
+                        _showAlert(context, "Success", result.message, navigate: true);
+                        clearAllFeildsWithoutNavigation();
                       }else{
                         _showAlert(context, "Error", result.message);
                       }                    
@@ -235,7 +236,7 @@ class _SigninScreenState extends State<SigninScreen> {
     );
   }
 
-  void _showAlert(BuildContext context, String title, String message) {
+  void _showAlert(BuildContext context, String title, String message, {bool navigate = false}) {
     showDialog(
       context: context,
       builder: (context) {
@@ -245,13 +246,30 @@ class _SigninScreenState extends State<SigninScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // close dialog
+                if (navigate) {
+                  navigateToLoginPage(); // navigate only after OK
+                }
               },
               child: const Text("OK"),
             ),
           ],
         );
       },
+    );
+  }
+  
+  void clearAllFeildsWithoutNavigation() {
+    userNameController.clear();
+    userEmailController.clear();
+    cPasswordController.clear();
+    passwordController.clear();
+  }
+  
+  void navigateToLoginPage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context)=> const LoginScreen()) 
     );
   }
 }
