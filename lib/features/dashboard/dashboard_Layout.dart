@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frist_mobile_app/features/dashboard/ui/home.dart';
-import 'package:frist_mobile_app/features/ui/app_colors.dart';
+import 'package:frist_mobile_app/common/app_colors.dart';
 import 'ui/profile_page.dart';
 import 'ui/tasks_page.dart';
 import 'ui/attachments_page.dart';

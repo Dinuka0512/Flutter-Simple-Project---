@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frist_mobile_app/dto/auth_result.dart';
 import 'package:frist_mobile_app/features/auth/login_screen.dart';
-import 'package:frist_mobile_app/features/ui/app_colors.dart';
+import 'package:frist_mobile_app/common/app_colors.dart';
 import 'package:frist_mobile_app/services/auth_service.dart';
 import 'package:frist_mobile_app/utils/Validations.dart';
 
