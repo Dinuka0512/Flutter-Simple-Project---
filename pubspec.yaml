@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+  flutter_riverpod: ^2.0.0
   # Firebase core (required for all Firebase services)
   firebase_core: ^2.30.0
 
