@@ -6,10 +6,6 @@ class AttachmentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Attachments"), backgroundColor: AppColors.red
-      ),
-      body: const Center(child: Text("Attachments Page Content")),
-    );
+    return Text("Atachments..");
   }
 }

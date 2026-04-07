@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frist_mobile_app/features/dashboard/ui/home.dart';
 import 'package:frist_mobile_app/features/ui/app_colors.dart';
-import 'profile_page.dart';
-import 'tasks_page.dart';
-import 'attachments_page.dart';
-import 'logs_page.dart';
+import 'ui/profile_page.dart';
+import 'ui/tasks_page.dart';
+import 'ui/attachments_page.dart';
+import 'ui/logs_page.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -16,7 +17,7 @@ class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = const [
-    Dashboard(), // main dashboard body
+    Home(),
     LogsPage(),
     TasksPage(),
     AttachmentsPage(),
@@ -53,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
-      body: _pages[_selectedIndex],
+      
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -65,9 +66,10 @@ class _DashboardState extends State<Dashboard> {
           BottomNavigationBarItem(icon: Icon(Icons.list), label: "Logs"),
           BottomNavigationBarItem(icon: Icon(Icons.task), label: "Tasks"),
           BottomNavigationBarItem(icon: Icon(Icons.attach_file), label: "Attachments"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: const Icon(Icons.person), label: "Profile"),
         ],
       ),
+      body: _pages[_selectedIndex],
     );
   }
 }

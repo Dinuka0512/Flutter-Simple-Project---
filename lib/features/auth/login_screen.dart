@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frist_mobile_app/features/auth/signin_screen.dart';
-import 'package:frist_mobile_app/features/dashboard/dashboard.dart';
+import 'package:frist_mobile_app/features/dashboard/dashboard_Layout.dart';
 import 'package:frist_mobile_app/features/ui/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {

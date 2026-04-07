@@ -6,9 +6,6 @@ class LogsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Logs"), backgroundColor: AppColors.red),
-      body: const Center(child: Text("Logs Page Content")),
-    );
+    return Text("Logs...");
   }
 }

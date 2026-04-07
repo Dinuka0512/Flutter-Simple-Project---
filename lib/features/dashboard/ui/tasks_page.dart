@@ -6,10 +6,6 @@ class TasksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Tasks"), backgroundColor: AppColors.red
-      ),
-      body: const Center(child: Text("Tasks Page Content")),
-    );
+    return Text("tasks...");
   }
 }
