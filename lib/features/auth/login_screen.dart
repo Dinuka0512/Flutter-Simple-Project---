@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frist_mobile_app/features/auth/Presentation/signin_screen.dart';
+import 'package:frist_mobile_app/features/auth/signin_screen.dart';
+import 'package:frist_mobile_app/features/dashboard/dashboard.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -101,7 +102,10 @@ class LoginScreen extends StatelessWidget {
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () {
-                      
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context)=>Dashboard())
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF2167E3), // Match the blue in image

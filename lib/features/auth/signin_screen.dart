@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frist_mobile_app/dto/auth_result.dart';
-import 'package:frist_mobile_app/features/auth/Presentation/login_screen.dart';
+import 'package:frist_mobile_app/features/auth/login_screen.dart';
 import 'package:frist_mobile_app/services/auth_service.dart';
 import 'package:frist_mobile_app/utils/Validations.dart';
 
