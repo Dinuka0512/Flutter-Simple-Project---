@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frist_mobile_app/features/ui/app_colors.dart';
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
