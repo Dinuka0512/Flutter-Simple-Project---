@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:frist_mobile_app/dto/auth_result.dart';
 import 'package:frist_mobile_app/features/auth/signin_screen.dart';
 import 'package:frist_mobile_app/features/dashboard/dashboard_Layout.dart';
 import 'package:frist_mobile_app/common/app_colors.dart';
+import 'package:frist_mobile_app/services/auth_service.dart';
+import 'package:frist_mobile_app/utils/Validations.dart';
 
-class LoginScreen extends StatelessWidget {
+final TextEditingController userEmailContro = TextEditingController();
+final TextEditingController userPwController = TextEditingController();
+
+
+class LoginScreen extends StatelessWidget {  
   const LoginScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +54,7 @@ class LoginScreen extends StatelessWidget {
 
                 // 3. Email Field
                 TextField(
+                  controller: userEmailContro,
                   decoration: InputDecoration(
                     hintText: "Email or Username",
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
@@ -66,6 +73,7 @@ class LoginScreen extends StatelessWidget {
 
                 // 4. Password Field with Icons
                 TextField(
+                  controller: userPwController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
@@ -102,11 +110,30 @@ class LoginScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context)=>Dashboard())
-                      );
+                    onPressed: () async {
+                      String email = userEmailContro.text;
+                      String password = userPwController.text;
+
+                      //Frist check is both are not null
+                      if(email.isEmpty || password.isEmpty){
+                        _showAlert(context, "Error", "All fields are required..!");
+                        return;
+                      }
+
+                      if(!Validators.isValidEmail(email)){
+                        _showAlert(context, "Error", "Enter the valid email..");
+                        return;
+                      }
+
+                      //if all ok need to call login 
+                      AuthResult result = await AuthService.userLogin(email, password);
+                      
+                      if (result.success) {
+                        print(result.user?['email']);
+                        navigateToLoginPage(context);
+                      } else {
+                        _showAlert(context, "Login Failed", result.message ?? "An error occurred");
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.red, // Match the blue in image
@@ -148,6 +175,36 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showAlert(BuildContext context, String title, String message, {bool navigate = false}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // close dialog
+                if (navigate) {
+                  navigateToLoginPage(context); // navigate only after OK
+                }
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void navigateToLoginPage(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context)=> const Dashboard()) 
     );
   }
 }

@@ -41,7 +41,40 @@ class AuthService {
   }
 
   //login
-  static bool userLogin(String email, String password){
-    return false;
+  static Future<AuthResult> userLogin(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+
+      if (user != null) {
+        // Get user data from Firestore
+        DocumentSnapshot doc = await _firestore.collection('users').doc(user.uid).get();
+        if (doc.exists) {
+          Map<String, dynamic> userData = doc.data() as Map<String, dynamic>;
+          return AuthResult(true, "Login successful", user: userData);
+        } else {
+          return AuthResult(false, "User data not found");
+        }
+      } else {
+        return AuthResult(false, "Login failed");
+      }
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          return AuthResult(false, "No user found for this email.");
+        case 'wrong-password':
+          return AuthResult(false, "Wrong password provided.");
+        case 'invalid-email':
+          return AuthResult(false, "The email address is not valid.");
+        case 'user-disabled':
+          return AuthResult(false, "This user account has been disabled.");
+        case 'too-many-requests':
+          return AuthResult(false, "Too many failed login attempts. Please try again later.");
+        default:
+          return AuthResult(false, "Login error: ${e.message}");
+      }
+    } catch (e) {
+      return AuthResult(false, "Unexpected error: $e");
+    }
   }
 }
