@@ -4,7 +4,7 @@ import 'package:frist_mobile_app/common/app_colors.dart';
 import 'ui/profile_page.dart';
 import 'ui/tasks_page.dart';
 import 'ui/attachments_page.dart';
-import 'ui/logs_page.dart';
+import 'ui/students.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
 
   final List<Widget> _pages = const [
     Home(),
-    LogsPage(),
+    Students(),
     TasksPage(),
     AttachmentsPage(),
     ProfilePage(),
@@ -63,7 +63,7 @@ class _DashboardState extends State<Dashboard> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: "Logs"),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: "Students"),
           BottomNavigationBarItem(icon: Icon(Icons.task), label: "Tasks"),
           BottomNavigationBarItem(icon: Icon(Icons.attach_file), label: "Attachments"),
           BottomNavigationBarItem(icon: const Icon(Icons.person), label: "Profile"),
