@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frist_mobile_app/dto/auth_result.dart';
 import 'package:frist_mobile_app/features/auth/signin_screen.dart';
 import 'package:frist_mobile_app/features/dashboard/dashboard_Layout.dart';
 import 'package:frist_mobile_app/common/app_colors.dart';
 import 'package:frist_mobile_app/services/auth_service.dart';
 import 'package:frist_mobile_app/utils/Validations.dart';
+import 'package:frist_mobile_app/providers/auth_providers.dart';
 
 final TextEditingController userEmailContro = TextEditingController();
 final TextEditingController userPwController = TextEditingController();
 
-
-class LoginScreen extends StatelessWidget {  
+class LoginScreen extends ConsumerWidget {  
   const LoginScreen({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColors.background,
       resizeToAvoidBottomInset: true,
@@ -129,10 +130,13 @@ class LoginScreen extends StatelessWidget {
                       AuthResult result = await AuthService.userLogin(email, password);
                       
                       if (result.success) {
-                        print(result.user?['email']);
+                        //HERE NEED TO GET THE USER DATA AND NEED TO MAKE THAT ACCESIBLE ON APPLYCATION ANY WERE....
+                        //USEING RIVERPOD... 
+                        //HERE HAVE SET THE EMAIL - with the riverpod stateManager..
+                        ref.read(emailProvider.notifier).state = email;
                         navigateToLoginPage(context);
                       } else {
-                        _showAlert(context, "Login Failed", result.message ?? "An error occurred");
+                        _showAlert(context, "Login Failed", result.message);
                       }
                     },
                     style: ElevatedButton.styleFrom(
